@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home = () => {
   return(
-    <div>Welcome to React Fullstack!</div>
+    <div>Home</div>
   )
 }
 
