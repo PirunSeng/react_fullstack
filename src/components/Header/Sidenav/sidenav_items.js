@@ -52,14 +52,6 @@ const SideNavItems = () => {
     } )
   }
 
-  {/*
-    <div className={style.option}>
-      <Link to="/">
-        <FontAwesome name="home" />
-        Home
-      </Link>
-    </div>
-    */}
   return (
     <div>
       { showItems() }
