@@ -4,7 +4,6 @@ import { URL } from '../../../../config';
 
 import styles from '../../articles.css';
 import Header from './header'
-import Body from './body'
 
 class NewsArticle extends Component {
   state = {
@@ -19,7 +18,6 @@ class NewsArticle extends Component {
 
       axios.get(`${URL}/teams?id=${article.team}`)
       .then(response => {
-        console.log(response.data)
         this.setState({
           article,
           team:response.data
@@ -31,7 +29,6 @@ class NewsArticle extends Component {
   render(){
     const article = this.state.article;
     const team = this.state.team;
-    // console.log(article)
 
     return(
       <div className={styles.articleWrapper} >
@@ -40,7 +37,18 @@ class NewsArticle extends Component {
           date={article.date}
           author={article.author}
         />
-        <Body/>
+        <div className={styles.articleBody}>
+          <h1>{article.title}</h1>
+          <div className={styles.articleImage}
+            style={{
+              background: `url('/images/articles/${article.image}')`
+            }}
+          >
+          </div>
+          <div className={styles.articleText}>
+            {article.body}
+          </div>
+        </div>
       </div>
     )
   }
