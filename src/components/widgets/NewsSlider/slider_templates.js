@@ -8,6 +8,7 @@ const SliderTemplates = (props) => {
   let template = null;
   const settings = {
     dots: true,
+    // dots: true,
     infinite: true,
     arrows: false,
     speed: 500,

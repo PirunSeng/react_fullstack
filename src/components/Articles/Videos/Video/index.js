@@ -32,7 +32,6 @@ class VideoArticle extends Component {
   }
 
   getRelated = () => {
-    console.log(this.state)
     axios.get(`${URL}/teams`)
     .then(response => {
       let teams = response.data;
@@ -50,7 +49,7 @@ class VideoArticle extends Component {
   render(){
     const article = this.state.article;
     const team = this.state.team;
-    console.log(this.state.teams)
+
     return(
       <div>
         <Header teamData={team[0]} />
@@ -64,6 +63,7 @@ class VideoArticle extends Component {
           >
           </iframe>
         </div>
+        <h2>Video ID : {this.props.match.params.id}</h2>
         <VideosRelated
           data={this.state.related}
           teams={this.state.teams}
