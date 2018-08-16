@@ -20,10 +20,47 @@ const FormFields = (props) => {
     })
   }
 
-  const changeHanler = (event, id) => {
+  const changeHanler = (event, id, blur) => {
     const newState = props.formData;
     newState[id].value = event.target.value;
+
+    if(blur){
+      let validData = validate(newState[id])
+      newState[id].valid = validData[0];
+      newState[id].validationMessage = validData[1];
+    }
+    newState[id].touched = blur;
+
     props.change(newState)
+  }
+
+  const validate = (element) => {
+    let error = [true, ''];
+
+    if(element.validation.minLength){
+      const valid = element.value.trim().length >= element.validation.minLength;
+      const message = `${ !valid ? 'Too short' : '' }`
+      error = !valid ? [valid, message] : error
+    }
+
+    if(element.validation.required){
+      const valid = element.value.trim() !== '';
+      const message = `${ !valid ? 'This field is required' : '' }`
+      error = !valid ? [valid, message] : error
+    }
+    return error;
+  }
+
+  const showValidation = (data) => {
+    let errorMsg = null;
+    if(data.validation && !data.valid){
+      errorMsg = (
+        <div className="label_error">
+          { data.validationMessage }
+        </div>
+      )
+    }
+    return errorMsg;
   }
 
   const renderTemplates = (data) => {
@@ -38,10 +75,49 @@ const FormFields = (props) => {
             <input
               {...values.config}
               value={values.value}
+              onBlur={
+                (event) => changeHanler(event, data.id, true)
+              }
+              onChange={
+                (event) => changeHanler(event, data.id, false)
+              }
+            />
+            { showValidation(values) }
+          </div>
+        )
+        break;
+
+      case('textarea'):
+        formTemplate = (
+          <div>
+            { showLable(values.label, values.labelText) }
+            <textarea
+              { ...values.config }
+              value={values.value}
               onChange={
                 (event) => changeHanler(event, data.id)
               }
             />
+          </div>
+        )
+        break;
+      case('select'):
+        formTemplate = (
+          <div>
+            { showLable(values.label, values.labelText) }
+            <select
+              value={values.value}
+              name={values.config.name}
+              onChange={
+                (event) => changeHanler(event, data.id)
+              }
+            >
+            {
+              values.config.options.map((item, i) => (
+                <option key={i} value={item.val}>{item.text}</option>
+              ))
+            }
+            </select>
           </div>
         )
         break;
