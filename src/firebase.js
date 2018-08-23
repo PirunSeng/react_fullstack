@@ -12,6 +12,14 @@ const config = {
 firebase.initializeApp(config);
 
 const firebaseDB = firebase.database();
+// provider
+const googleAuth = new firebase.auth.GoogleAuthProvider();
+
+export {
+  firebase,
+  firebaseDB,
+  googleAuth
+}
 
 // ADD/UPDATE
 
@@ -88,6 +96,39 @@ const firebaseDB = firebase.database();
 //   console.log(snapshot.key, snapshot.val())
 // })
 
-firebaseDB.ref().on('child_added', (snapshot)=>{
-  console.log(snapshot.key, snapshot.val())
-})
+// firebaseDB.ref().on('child_added', (snapshot)=>{
+//   console.log(snapshot.key, snapshot.val())
+// })
+
+// firebaseDB.ref('users/-LKXIAgjWSmfXOBsP6U4').once('value')
+// .then((snapshot)=>{
+//   console.log(snapshot.val())
+// })
+
+// firebaseDB.ref('users').orderByChild('age').once('value')
+// firebaseDB.ref('users').limitToFirst(2).once('value')
+// firebaseDB.ref('users').orderByChild('age').limitToFirst(1).once('value')
+
+// .then((snapshot)=>{
+//   // console.log(snapshot.val())
+//   const users = []
+//   snapshot.forEach((childSnapshot)=>{
+//     users.push({
+//       id: childSnapshot.key,
+//       ...childSnapshot.val()
+//       // age: childSnapshot.val().age
+//     })
+//   })
+//   console.log(users)
+// })
+
+// firebaseDB.ref('users').push({
+//   age: 15,
+//   firstname: 'John',
+//   lastname: 'Doe'
+// })
+
+// firebaseDB.ref('users').orderByChild('firstname').equalTo('Pirun').once('value')
+// .then((snapshot)=>{
+//   console.log(snapshot.val())
+// })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header/header';
 import FormFields from '../widgets/Forms/formFields';
+import { firebaseDB } from '../firebase';
 
 class User extends Component {
   state = {
@@ -95,7 +96,13 @@ class User extends Component {
     }
 
     if (formValid){
-      console.log(dataToSubmit)
+      // console.log(dataToSubmit)
+      firebaseDB.ref('users').push(dataToSubmit)
+      .then(()=>{
+        console.log('New user added!')
+      }).catch((e)=>{
+        console.log(e)
+      })
     }
 
     // axios.post(url, dataToSubmit)

@@ -4,6 +4,7 @@ import Home from './components/Home/home';
 import Controlled from './components/controlled';
 import Uncontrolled from './components/uncontrolled';
 import User from './components/user';
+import Login from './components/login';
 
 class Routes extends Component {
   render(){
@@ -13,6 +14,7 @@ class Routes extends Component {
         <Route path="/controlled" exact component={Controlled} />
         <Route path="/uncontrolled" exact component={Uncontrolled} />
         <Route path="/user" exact component={User} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     )
   }
