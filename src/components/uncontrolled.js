@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header/header';
 
 class Uncontrolled extends Component {
 
@@ -16,8 +15,6 @@ class Uncontrolled extends Component {
   render(){
     return(
       <div>
-        <Header />
-
         <div className="container">
           <form>
             <div className="form_element">

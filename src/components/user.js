@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header/header';
 import FormFields from '../widgets/Forms/formFields';
 import { firebaseDB } from '../firebase';
 
@@ -111,8 +110,6 @@ class User extends Component {
   render(){
     return(
       <div>
-        <Header />
-
         <div className="container">
           <form onSubmit={this.submitForm}>
             <FormFields

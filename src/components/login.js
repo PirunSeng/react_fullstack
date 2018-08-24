@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header/header';
 import { firebase, googleAuth } from '../firebase';
 
 class Login extends Component {
@@ -26,7 +25,6 @@ class Login extends Component {
   render(){
     return(
       <div>
-        <Header />
         {
           this.state.status ?
           <button onClick={ this.signOut }>Logout</button>

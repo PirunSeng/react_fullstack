@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header/header';
 
 class Controlled extends Component {
   state = {
@@ -29,8 +28,6 @@ class Controlled extends Component {
   render(){
     return(
       <div>
-        <Header />
-
         <div className="container">
           <form onSubmit={this.handleSubmit}>
             <div className="form_element">
