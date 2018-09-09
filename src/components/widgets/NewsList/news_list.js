@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { firebaseTeams, firebaseArticles, firebaseLooper } from '../../../firebase';
+
 import style from './news_list.css';
 import Buttons from '../Buttons/buttons'
 import CardInfo from '../CardInfo/card_info';
-
-import { URL } from '../../../config';
 
 class NewsList extends Component {
   state = {
     teams: [],
     items: [],
     start: this.props.start,
-    end: this.props.start + this.props.amount,
+    end: this.props.amount,
     amount: this.props.amount
   }
 
@@ -23,27 +22,32 @@ class NewsList extends Component {
 
   request = (start, end) => {
     if(this.state.teams.length < 1){
-      axios.get(`${URL}/teams`)
-      .then(response => {
+      firebaseTeams.once('value')
+      .then((snapshot)=>{
+        const teams = firebaseLooper(snapshot);
         this.setState({
-          teams:response.data
+          teams
         })
       })
     }
 
-    axios.get(`${URL}/articles?_start=${this.state.start}&_end=${this.state.end}`)
-    .then( response => {
+    firebaseArticles.orderByChild('id').startAt(start).endAt(end).once('value')
+    .then((snapshot)=>{
+      const articles = firebaseLooper(snapshot);
       this.setState({
-        items:[...this.state.items, ...response.data],
+        items:[...this.state.items, ...articles],
         start,
         end
       })
+    })
+    .catch((e)=>{
+      console.log(e)
     })
   }
 
   loadMore = () => {
     let end = this.state.end + this.state.amount
-    this.request(this.state.end, end)
+    this.request(this.state.end + 1, end)
   }
 
   renderNews = (type) => {
@@ -51,6 +55,7 @@ class NewsList extends Component {
     switch (type) {
       case "card":
         template = this.state.items.map( (item, i) => (
+
           <CSSTransition
             classNames={{
               enter:style.newslist_wrapper,
@@ -63,7 +68,7 @@ class NewsList extends Component {
               <div className={style.newslist_item}>
                 <Link to={`/articles/${item.id}`}>
                   <CardInfo teams={this.state.teams} team={item.team} date={item.date} />
-                  <h3>{item.title}</h3>
+                  <h3>{item.title} Article ID : { item.id } and Team ID : { item.team }</h3>
                 </Link>
               </div>
             </div>

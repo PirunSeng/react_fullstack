@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { URL } from '../../../../config';
+import { firebaseDB, firebaseLooper, firebaseTeams } from '../../../../firebase';
 
 import styles from '../../articles.css';
 import Header from './header'
@@ -12,18 +11,43 @@ class NewsArticle extends Component {
   }
 
   componentWillMount() {
-    axios.get(`${URL}/articles?id=${this.props.match.params.id}`)
-    .then(response => {
-      let article = response.data[0];
+    // let keys = firebaseDB.ref('articles');
+    // console.log(keys);
 
-      axios.get(`${URL}/teams?id=${article.team}`)
-      .then(response => {
+    // firebaseDB.ref(`articles/${this.props.match.params.id}`).once('value')
+    firebaseDB.ref('articles').orderByChild('id').equalTo(parseInt(this.props.match.params.id)).limitToFirst(1).once('value')
+    .then((snapshot)=>{
+      console.log(snapshot.val());
+      let article = (snapshot.val())[0];
+
+      firebaseTeams.orderByChild('id').equalTo(article.team).once('value')
+      .then((snapshot)=>{
+        const team = firebaseLooper(snapshot)
         this.setState({
           article,
-          team:response.data
+          team
         })
+      }).catch((e)=>{
+        console.log(e)
       })
+
+
+
+    }).catch((e) =>{
+      console.log(e)
     })
+    // axios.get(`${URL}/articles?id=${this.props.match.params.id}`)
+    // .then(response => {
+    //   let article = response.data[0];
+    //
+    //   axios.get(`${URL}/teams?id=${article.team}`)
+    //   .then(response => {
+    //     this.setState({
+    //       article,
+    //       team:response.data
+    //     })
+    //   })
+    // })
   }
 
   render(){

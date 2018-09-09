@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { firebaseArticles, firebaseLooper } from '../../../firebase';
+
 import SliderTemplates from './slider_templates';
-import axios from 'axios';
-import { URL } from '../../../config';
+
 
 class NewsSlider extends Component {
 
@@ -10,12 +11,25 @@ class NewsSlider extends Component {
   }
 
   componentWillMount() {
-    axios.get(`${URL}/articles?_start=${this.props.start}&_end=${this.props.amount}`)
-    .then( response => {
+    firebaseArticles.limitToFirst(3).once('value')
+    .then((snapshot)=>{
+      // console.log(snapshot.val())
+      const news = firebaseLooper(snapshot)
+
       this.setState({
-        news: response.data
+        news
       })
-    } )
+
+    }).catch((e)=>{
+      console.log(e)
+    })
+
+    // axios.get(`${URL}/articles?_start=${this.props.start}&_end=${this.props.amount}`)
+    // .then( response => {
+    //   this.setState({
+    //     news: response.data
+    //   })
+    // } )
   }
 
   render(){
@@ -26,3 +40,5 @@ class NewsSlider extends Component {
 }
 
 export default NewsSlider;
+
+// Don't use id start with 0 of firebase, should use something else to display team properly

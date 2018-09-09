@@ -2,32 +2,32 @@
     "articles":[
         {
             "id":1,
-            "team":3,
-            "title":"Excepteur sint occaecat cupidatat non proident.",
+            "team":1,
+            "title":"First",
             "image":"1.jpeg",
-            "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "body":"First",
             "date":"10/12/2018",
-            "author":"John Secada",
+            "author":"First",
             "tags":["Knicks","Porzinguis"]
         },
         {
             "id":2,
-            "team":4,
-            "title":"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+            "team":2,
+            "title":"Second",
             "image":"2.jpg",
-            "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+            "body":"Second",
             "date":"10/12/2018",
-            "author":"John Secada",
+            "author":"Second",
             "tags":["Knicks","Porzinguis"]
         },
         {
             "id":3,
             "team":3,
-            "title":"Labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
+            "title":"Third",
             "image":"3.jpg",
-            "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+            "body":"Third",
             "date":"10/12/2018",
-            "author":"John Secada",
+            "author":"Third",
             "tags":["Knicks","Porzinguis"]
         },
         {
@@ -367,7 +367,7 @@
     "teams": [
         {
           "id": 1,
-          "name": "Hawks",
+          "name": "Team 1",
           "city": "Atlanta",
           "logo": "hawks.png",
           "poll": "false",
@@ -382,7 +382,7 @@
         },
         {
           "id": 2,
-          "name": "Celtics",
+          "name": "Team 2",
           "city": "Boston",
           "logo": "celtics.png",
           "poll": "false",
@@ -397,7 +397,7 @@
         },
         {
           "id": 3,
-          "name": "Nets",
+          "name": "Team 3",
           "city": "New Jersey",
           "logo": "nets.png",
           "poll": "false",
