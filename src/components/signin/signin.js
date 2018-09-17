@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './signin.css';
 import FormFields from '../widgets/FormFields/form_fields';
-
+import { firebase } from '../../firebase';
 
 class SignIn extends Component {
   state = {
@@ -59,7 +59,7 @@ class SignIn extends Component {
     newElement.touched = element.blur;
     newFormData[element.id] = newElement;
 
-    console.log(newFormData)
+    // console.log(newFormData)
 
     this.setState({
       formData: newFormData
@@ -107,9 +107,31 @@ class SignIn extends Component {
           registerError: ''
         })
         if(type){
-          console.log('Logging in')
+          firebase.auth()
+          .signInWithEmailAndPassword(
+            dataToSubmit.email,
+            dataToSubmit.password
+          ).then(()=>{
+            this.props.history.push('/')
+          }).catch(error => {
+            this.setState({
+              loading: false,
+              registerError: error.message
+            })
+          })
         }else{
-          console.log('Registering')
+          firebase.auth()
+          .createUserWithEmailAndPassword(
+            dataToSubmit.email,
+            dataToSubmit.password
+          ).then(()=>{
+            this.props.history.push('/')
+          }).catch(error => {
+            this.setState({
+              loading: false,
+              registerError: error.message
+            })
+          })
         }
       }
     }
@@ -123,6 +145,12 @@ class SignIn extends Component {
       <button onClick={(event)=>this.submitForm(event, false)}> Register Now </button>
       <button onClick={(event)=>this.submitForm(event, true)}> Log In </button>
     </div>
+  )
+
+  showError = () => (
+    this.state.registerError !== '' ?
+    <div className={styles.error}>{this.state.registerError}</div>
+    : ''
   )
 
   render(){
@@ -142,6 +170,7 @@ class SignIn extends Component {
             change={(element) => this.updateForm(element)}
           />
           { this.submitButton() }
+          { this.showError() }
         </form>
       </div>
     )
