@@ -39,6 +39,7 @@ class NewsList extends Component {
         start,
         end
       })
+      // console.log(this.state.items)
     })
     .catch((e)=>{
       console.log(e)

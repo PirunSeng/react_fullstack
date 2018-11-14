@@ -11,16 +11,12 @@ class NewsArticle extends Component {
   }
 
   componentWillMount() {
-    // let keys = firebaseDB.ref('articles');
-    // console.log(keys);
-
-    // firebaseDB.ref(`articles/${this.props.match.params.id}`).once('value')
-    firebaseDB.ref('articles').orderByChild('id').equalTo(parseInt(this.props.match.params.id)).limitToFirst(1).once('value')
+    firebaseDB.ref(`articles/${this.props.match.params.id}`).once('value')
     .then((snapshot)=>{
-      console.log(snapshot.val());
-      let article = (snapshot.val())[0];
+      let article = snapshot.val();
 
-      firebaseTeams.orderByChild('id').equalTo(article.team).once('value')
+      firebaseTeams.orderByChild("id").equalTo(article.teams).once('value')
+
       .then((snapshot)=>{
         const team = firebaseLooper(snapshot)
         this.setState({
@@ -30,8 +26,6 @@ class NewsArticle extends Component {
       }).catch((e)=>{
         console.log(e)
       })
-
-
 
     }).catch((e) =>{
       console.log(e)

@@ -21,7 +21,9 @@ const firebaseLooper = (snapshot) => {
   snapshot.forEach((childSnapshot)=>{
 
     // let keyNum = parseInt(childSnapshot.key) + 1
-    let keyNum = childSnapshot.val().id
+    // console.log(childSnapshot.key)
+    let keyNum = childSnapshot.key
+    // let keyNum = childSnapshot.val().id
     data.push({
       ...childSnapshot.val(),
       id: keyNum

@@ -4,7 +4,7 @@ import style from './slider.css';
 import { Link } from 'react-router-dom';
 
 const SliderTemplates = (props) => {
-
+  // console.log(props)
   let template = null;
   const settings = {
     dots: true,
@@ -17,9 +17,12 @@ const SliderTemplates = (props) => {
     ...props.settings
   }
 
+  // console.log(props.data)
+
   switch (props.type) {
     case "featured":
       template = props.data.map((item, i) => {
+        console.log(item.image)
         return(
           <div key={i}>
             <div className={style.featured_item}>
